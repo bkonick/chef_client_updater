@@ -53,7 +53,7 @@ rescue LoadError
 end
 
 def update_rubygems
-  compatible_rubygems_versions = '>= 2.0.0'
+  compatible_rubygems_versions = '>= 2.6.11'
   target_version = '2.6.11'
 
   rubygems_version = Gem::Version.new(Gem::VERSION)
