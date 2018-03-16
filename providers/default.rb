@@ -24,6 +24,8 @@
 
 use_inline_resources
 
+include Chef::Mixin::ShellOut
+
 provides :chef_client_updater if respond_to?(:provides)
 
 def load_mixlib_install
@@ -62,10 +64,9 @@ def update_rubygems
   pin = Gem::Requirement.new(pin_rubygems_range).satisfied_by?(rubygems_version)
 
   converge_by "upgrade rubygems #{rubygems_version} to #{pin ? target_version : 'latest'}" do
-    require 'rubygems/commands/update_command'
-    args = ['--no-rdoc', '--no-ri', '--system']
-    args.push(target_version) if pin
-    Gem::Commands::UpdateCommand.new.invoke(*args)
+    command = "#{gem_bin} update --system --no-rdoc --no-ri"
+    command << " #{target_version}" if pin
+    shell_out!(command)
   end
 end
 
