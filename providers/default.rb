@@ -125,7 +125,8 @@ def current_version
   when 'chef'
     node['chef_packages']['chef']['version']
   when 'chefdk'
-    Mixlib::ShellOut.new('chef -v').run_command.stdout.match(/^Chef Development Kit Version.*/).to_s.split(': ').last
+    require 'chef-dk/version'
+    ChefDK::VERSION
   end
 end
 
