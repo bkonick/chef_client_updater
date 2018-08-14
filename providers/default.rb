@@ -472,9 +472,9 @@ action :update do
     if (node['chef_client'] && node['chef_client']['init_style'] == 'init') || node['chef_client_updater']['restart_chef_via_cron']
       start_cmd = case node['platform_family']
                   when 'aix'
-                    '/usr/bin/startsrc -s chef > /dev/console 2>&1'
+                    '/usr/bin/stopsrc -s chef > /dev/console 2>&1 ; /usr/bin/startsrc -s chef > /dev/console 2>&1'
                   else
-                    '/etc/init.d/chef-client start'
+                    '/etc/init.d/chef-client restart'
                   end
 
       r = cron 'chef_client_updater' do
