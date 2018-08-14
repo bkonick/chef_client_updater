@@ -81,7 +81,7 @@ def update_rubygems
       shell_out!("#{gem_bin} update --system --no-rdoc --no-ri #{source}")
     else
       require 'rubygems/commands/update_command'
-      args = ['--no-rdoc', '--no-ri', '--system' ]
+      args = ['--no-rdoc', '--no-ri', '--system']
       args.push(target_version) if pin
       Gem::Commands::UpdateCommand.new.invoke(*args)
     end
@@ -469,7 +469,7 @@ action :update do
   rescue SystemExit
     # sysvinit won't restart after we exit, potentially use cron to do so
     # either trust the chef-client cookbook's init scripts or the users choice
-    if (node['chef_client'] && node['chef_client']['init_style'] == 'init') || node['chef_client_updater']['restart_chef_via_cron']
+    if (node['chef_client'] && (node['chef_client']['init_style'] == 'init' || node['chef_client']['init_style'] == 'src')) || node['chef_client_updater']['restart_chef_via_cron']
       start_cmd = case node['platform_family']
                   when 'aix'
                     '/usr/bin/stopsrc -s chef > /dev/console 2>&1 ; /usr/bin/startsrc -s chef > /dev/console 2>&1'
