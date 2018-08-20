@@ -89,7 +89,8 @@ def update_rubygems
 end
 
 def load_prerequisites!
-  update_rubygems
+  # This doesn't work in airgapped environments without a gem server
+  # update_rubygems
   load_mixlib_install
   load_mixlib_versioning
 end

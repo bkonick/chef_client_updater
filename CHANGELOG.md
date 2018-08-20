@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the chef_client_updater cookbook.
 
+## 3.4.3 (2018-08-20)
+
+- Allow this to work in an air gapped environment that doesn't have a gem server
+
 ## 3.4.2 (2018-08-15)
 
 - Fix to retrieve current version for angrychef nodes
