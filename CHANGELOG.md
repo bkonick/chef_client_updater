@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the chef_client_updater cookbook.
 
+## 3.4.4 (2018-08-31)
+
+Backport to fork
+- Only run the cron job on *nix 5 minutes from now
+
 ## 3.4.3 (2018-08-20)
 
 - Allow this to work in an air gapped environment that doesn't have a gem server
